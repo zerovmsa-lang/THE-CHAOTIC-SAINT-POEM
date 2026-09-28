@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#05030b">
+<meta name="description" content="The Fire Saint — a cosmic story-poem.">
+<title>The Fire Saint — A Story-Poem</title>
+
+<style>
+:root{
+  --bg:#030208;
+  --bg2:#080411;
+  --panel:rgba(12,7,22,.78);
+  --text:#e9e1f2;
+  --muted:#aaa0b5;
+  --dim:#70677b;
+  --violet:#a981ff;
+  --violet2:#d2bdff;
+  --line:rgba(190,160,255,.17);
+  --glow:rgba(135,80,255,.22);
+  --max:920px;
+}
+
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;
+  background:var(--bg);
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  background:
+    radial-gradient(ellipse at 50% -10%,rgba(95,45,180,.22),transparent 48%),
+    radial-gradient(ellipse at 50% 55%,rgba(45,20,90,.10),transparent 50%),
+    linear-gradient(180deg,#05030b 0%,#020107 100%);
+  font-family:Georgia,"Times New Roman",serif;
+  line-height:1.9;
+  overflow-x:hidden;
+}
+
+/* ---------- COSMIC BACKGROUND ---------- */
+
+#stars{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:0;
+}
+
+.vignette{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+  background:
+    radial-gradient(ellipse at center,transparent 35%,rgba(0,0,0,.42) 100%);
+}
+
+.ambient{
+  position:fixed;
+  width:70vw;
+  height:70vw;
+  max-width:800px;
+  max-height:800px;
+  left:50%;
+  top:-35vw;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(125,75,255,.12),transparent 68%);
+  filter:blur(30px);
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ---------- NAV ---------- */
+
+.nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:62px;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 24px;
+  background:rgba(3,2,8,.78);
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+
+.nav-title{
+  color:var(--violet2);
+  font-size:13px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+}
+
+.nav-links{
+  display:flex;
+  gap:18px;
+}
+
+.nav-links a{
+  color:var(--muted);
+  text-decoration:none;
+  font-family:Arial,sans-serif;
+  font-size:11px;
+  letter-spacing:.08em;
+}
+
+.nav-links a:hover{color:white}
+
+.progress{
+  position:fixed;
+  top:61px;
+  left:0;
+  height:2px;
+  width:0;
+  z-index:21;
+  background:linear-gradient(90deg,#6d3cff,#cdb6ff,#fff);
+  box-shadow:0 0 12px #986cff;
+}
+
+@media(max-width:680px){
+  .nav{padding:0 17px}
+  .nav-links{display:none}
+}
+
+/* ---------- CONTENT BASE ---------- */
+
+.page{
+  position:relative;
+  z-index:2;
+}
+
+/* ---------- HERO ---------- */
+
+.hero{
+  min-height:100svh;
+  min-height:100vh;
+  padding:110px 22px 80px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  position:relative;
+}
+
+.hero-eyebrow{
+  color:var(--dim);
+  font-family:Arial,sans-serif;
+  font-size:10px;
+  letter-spacing:.42em;
+  text-transform:uppercase;
+  margin-bottom:28px;
+}
+
+.hero h1{
+  margin:0;
+  font-size:clamp(56px,13vw,130px);
+  line-height:.92;
+  font-weight:400;
+  letter-spacing:.045em;
+  color:#f0eafa;
+  text-shadow:
+    0 0 22px rgba(180,140,255,.32),
+    0 0 80px rgba(105,55,220,.18);
+}
+
+.hero-sub{
+  max-width:650px;
+  margin:35px auto 0;
+  color:#aaa0b3;
+  font-size:16px;
+  font-style:italic;
+}
+
+.hero-mark{
+  width:78px;
+  height:78px;
+  margin-top:55px;
+  border:1px solid rgba(190,160,255,.35);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:var(--violet2);
+  font-size:27px;
+  box-shadow:0 0 40px rgba(120,70,255,.12),inset 0 0 25px rgba(120,70,255,.07);
+  animation:pulse 5s ease-in-out infinite;
+}
+
+@keyframes pulse{
+  0%,100%{transform:scale(.96);box-shadow:0 0 30px rgba(120,70,255,.10)}
+  50%{transform:scale(1.04);box-shadow:0 0 55px rgba(150,100,255,.25)}
+}
+
+.scroll{
+  position:absolute;
+  bottom:25px;
+  color:#62596d;
+  font-family:Arial,sans-serif;
+  font-size:9px;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+}
+
+/* ---------- INTRO ---------- */
+
+.intro{
+  max-width:700px;
+  margin:0 auto;
+  padding:20px 25px 120px;
+  text-align:center;
+  color:#aaa0b3;
+}
+
+.intro-symbol{
+  color:var(--violet);
+  margin-bottom:25px;
+}
+
+/* ---------- STORY ---------- */
+
+.story{
+  width:min(var(--max),calc(100% - 28px));
+  margin:0 auto;
+  padding-bottom:130px;
+}
+
+/* ---------- SECTION ---------- */
+
+.section{
+  position:relative;
+  margin:0 auto 75px;
+  padding:60px clamp(24px,7vw,65px);
+  border:1px solid var(--line);
+  border-radius:7px;
+  background:
+    linear-gradient(145deg,rgba(18,10,31,.83),rgba(5,3,11,.76));
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.34),
+    inset 0 0 80px rgba(100,50,200,.025);
+}
+
+.section:before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:35px;
+  bottom:35px;
+  width:2px;
+  background:linear-gradient(transparent,var(--violet),transparent);
+  opacity:.45;
+}
+
+.kicker{
+  margin:0 0 9px;
+  color:#6e6479;
+  font-family:Arial,sans-serif;
+  font-size:10px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+}
+
+h2{
+  margin:0 0 42px;
+  font-size:clamp(27px,5vw,38px);
+  line-height:1.2;
+  font-weight:400;
+  color:#eee8f5;
+}
+
+h2:after{
+  content:"";
+  display:block;
+  width:55px;
+  height:1px;
+  margin-top:18px;
+  background:linear-gradient(90deg,var(--violet),transparent);
+}
+
+/* ---------- POEM ---------- */
+
+.poem{
+  font-size:17px;
+  color:#d7cfdf;
+}
+
+.poem p{
+  margin:0 0 28px;
+}
+
+.violet{
+  color:var(--violet2);
+  font-style:italic;
+}
+
+.question{
+  color:#eee8f5;
+  font-style:italic;
+}
+
+.dim{
+  color:#908698;
+}
+
+.divider{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  margin:52px 0;
+  color:#786b8b;
+}
+
+.divider:before,
+.divider:after{
+  content:"";
+  height:1px;
+  flex:1;
+  background:linear-gradient(90deg,transparent,var(--line));
+}
+
+.divider:after{
+  background:linear-gradient(90deg,var(--line),transparent);
+}
+
+/* ---------- UNKNOWN ---------- */
+
+.unknown{
+  min-height:48vh;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  margin:0 0 90px;
+}
+
+.unknown-word{
+  font-size:clamp(55px,13vw,130px);
+  letter-spacing:.09em;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(190,160,255,.43);
+  text-shadow:0 0 70px rgba(120,70,255,.15);
+  animation:unknown 8s ease-in-out infinite;
+}
+
+@keyframes unknown{
+  0%,100%{opacity:.55;letter-spacing:.09em}
+  50%{opacity:1;letter-spacing:.12em}
+}
+
+/* ---------- SAINT CARD ---------- */
+
+.saint{
+  margin:42px 0;
+  padding:32px 20px;
+  text-align:center;
+  border:1px solid rgba(170,130,255,.18);
+  background:radial-gradient(circle at 50% 0,rgba(125,75,240,.11),transparent 65%);
+}
+
+.saint-name{
+  color:#eee7f8;
+  font-size:27px;
+  letter-spacing:.13em;
+  margin-bottom:15px;
+}
+
+.saint-info{
+  color:#a69baa;
+  font-style:italic;
+}
+
+/* ---------- QUOTE ---------- */
+
+.quote{
+  margin:45px 0;
+  padding:30px 35px;
+  border-left:1px solid var(--violet);
+  background:rgba(130,85,220,.035);
+  color:#d9cfe5;
+  font-style:italic;
+  position:relative;
+}
+
+.quote:before{
+  content:"“";
+  position:absolute;
+  top:-24px;
+  left:15px;
+  font-size:72px;
+  color:rgba(170,130,255,.17);
+}
+
+/* ---------- FIRE ---------- */
+
+.fire-zone{
+  margin:70px 0;
+  padding:80px 25px;
+  text-align:center;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  position:relative;
+  overflow:hidden;
+}
+
+.fire-zone:before{
+  content:"";
+  position:absolute;
+  width:520px;
+  height:220px;
+  left:50%;
+  bottom:-155px;
+  transform:translateX(-50%);
+  background:radial-gradient(ellipse,rgba(120,60,255,.2),transparent 70%);
+  filter:blur(18px);
+}
+
+.fire-title{
+  position:relative;
+  color:#eee7fb;
+  font-size:clamp(32px,7vw,52px);
+  font-weight:400;
+  text-shadow:0 0 25px rgba(160,110,255,.34);
+}
+
+/* ---------- BOOK ---------- */
+
+.book{
+  margin:50px 0;
+  padding:75px 25px;
+  text-align:center;
+  border:1px solid rgba(190,160,255,.18);
+  background:linear-gradient(135deg,rgba(100,60,180,.07),transparent);
+}
+
+.book-icon{
+  font-size:64px;
+  margin-bottom:15px;
+  opacity:.8;
+}
+
+.book h3{
+  margin:0 0 15px;
+  font-size:34px;
+  font-weight:400;
+}
+
+.book p{
+  color:#9e94a8;
+  font-style:italic;
+}
+
+/* ---------- END ---------- */
+
+.final{
+  text-align:center;
+}
+
+.final .quote{
+  max-width:650px;
+  margin:45px auto;
+  border-left:0;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:40px 20px;
+  background:transparent;
+}
+
+.smile{
+  color:var(--violet2);
+  font-size:20px;
+  font-style:italic;
+}
+
+/* ---------- FOOTER ---------- */
+
+footer{
+  position:relative;
+  z-index:2;
+  border-top:1px solid var(--line);
+  padding:85px 20px;
+  text-align:center;
+  color:#70677b;
+}
+
+.footer-title{
+  color:#b6a9c7;
+  font-size:20px;
+  letter-spacing:.15em;
+}
+
+.footer-symbol{
+  color:var(--violet);
+  margin:30px 0;
+}
+
+.footer-small{
+  font-family:Arial,sans-serif;
+  font-size:10px;
+  letter-spacing:.13em;
+}
+
+/* ---------- SCROLL REVEAL ---------- */
+/* Content is ALWAYS visible if JavaScript fails. */
+
+.reveal{
+  opacity:1;
+  transform:none;
+}
+
+.js .reveal{
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity .9s ease,transform .9s ease;
+}
+
+.js .reveal.show{
+  opacity:1;
+  transform:none;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:600px){
+  body{line-height:1.82}
+
+  .hero{
+    padding-left:18px;
+    padding-right:18px;
+  }
+
+  .hero h1{font-size:57px}
+
+  .hero-sub{font-size:15px}
+
+  .story{
+    width:calc(100% - 18px);
+  }
+
+  .section{
+    padding:42px 21px;
+    margin-bottom:55px;
+  }
+
+  .section:before{
+    top:25px;
+    bottom:25px;
+  }
+
+  .poem{font-size:16px}
+
+  .quote{
+    padding:27px 22px;
+  }
+
+  .unknown{
+    min-height:38vh;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+<div class="ambient"></div>
+<div class="vignette"></div>
+
+<nav class="nav">
+  <div class="nav-title">The Fire Saint</div>
+  <div class="nav-links">
+    <a href="#beginning">Beginning</a>
+    <a href="#unknown">Unknown</a>
+    <a href="#saint">Saint</a>
+    <a href="#journey">Journey</a>
+    <a href="#duel">Duel</a>
+    <a href="#ending">Ending</a>
+  </div>
+</nav>
+
+<div class="progress" id="progress"></div>
+
+<div class="page">
+
+<header class="hero">
+  <div class="hero-eyebrow">A Story-Poem</div>
+  <h1>The Fire Saint</h1>
+  <div class="hero-sub">
+    A tale of creation, the Unknown, the Almighty,
+    and a little chaotic Saint who wandered through existence.
+  </div>
+  <div class="hero-mark">✦</div>
+  <div class="scroll">Scroll into the Unknown</div>
+</header>
+
+<section class="intro">
+  <div class="intro-symbol">✦</div>
+  <p>
+    Before the stars.<br>
+    Before the skies.<br>
+    Before the sea.<br>
+    Before existence itself had a name.
+  </p>
+  <p>
+    There was something that could not be explained.
+  </p>
+</section>
+
+<main class="story">
+
+<section class="section reveal" id="beginning">
+  <div class="kicker">I — Before Everything</div>
+  <h2>The Wonders of Creation</h2>
+
+  <div class="poem">
+    <p>
+The stars, the skies, the sea, and the shores,
+Infinite universe and its countless galaxies.
+The time, the space, the concept of the end;
+Nowhere to be found, nowhere to be seen.
+    </p>
+
+    <p>
+Existence emerge, reality prevails.
+The wonders of creation, wonders of wonders.
+Arguments of creation that start with a bang.
+Creation of narratives that start with an ink.
+And a blind chaos that dreamed existence into being.
+    </p>
+
+    <p>All are but a speculation inside a written book.</p>
+
+    <div class="divider">✦</div>
+
+    <p>
+Before existence, before reality,
+An Actuality that ceased impossibilities.
+A void, a paradox, absolute nothingness.
+Nothing is still a thing, a thing exists.
+The absence of absolute nothing, the absence of silence.
+None can define, all tongues failed.
+    </p>
+
+    <p class="violet">The Actuality, The Unknown..</p>
+  </div>
+</section>
+
+<section class="unknown reveal" id="unknown">
+  <div class="unknown-word">UNKNOWN</div>
+</section>
+
+<section class="section reveal">
+  <div class="kicker">II — The Creator</div>
+  <h2>The One Who Created</h2>
+
+  <div class="poem">
+    <p>
+Emerge the Creator, Creator of all that creates.
+In the Unknown that all tongues failed.
+A lonely, a loving Creator.
+Created the being, the humble chaos.
+    </p>
+
+    <p class="violet">
+Oqhoi fȳr — "the mysterious flame" in the tongue that predates all.
+    </p>
+
+    <p>
+The embodiment of heat that annihilates chaos.
+An inborn flame of his own — Simte Flame.
+A reckoning force wrapped in humility.
+The Protector of all that exists.
+    </p>
+  </div>
+
+  <div class="saint">
+    <div class="saint-name">THE FIRE SAINT</div>
+    <div class="saint-info">
+      A little barefooted man of 5'5".<br>
+      Long white hair with blue, calm eyes.<br>
+      Wrapped in a grey robe adorned with white flames.
+    </div>
+  </div>
+
+  <div class="poem">
+    <p class="violet">The Fire Saint..</p>
+
+    <p>
+The loving, the Almighty Creator,
+Seeing a being just like himself,
+A joyous laughter fills the Unknown.
+    </p>
+
+    <p>
+A fragment of creation shaped as a lotus pendant.
+A gift for the little Saint..
+    </p>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="kicker">III — Creation</div>
+  <h2>Creator Of Creators</h2>
+
+  <div class="poem">
+    <p>
+The Almighty Creator, Creator Of All.
+The joyful Creator, Creator Of Creators.
+Brought existence into being with mere words.
+    </p>
+
+    <p>
+Creation emerge, existence emerge, reality into being.
+In the Unknown that swallows paradox,
+The Almighty is happy..
+    </p>
+
+    <p class="violet">Existence came into being.</p>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="kicker">IV — The Unknown Returns</div>
+  <h2>The Things Beyond Existence</h2>
+
+  <div class="poem">
+    <p>
+The Unknown from the Unknown.
+Formed from the Unknown.
+The Unknown that sensed creation.
+Emerge as the Unknown.
+    </p>
+
+    <p>
+The Unknown seeks to consume
+Existence as a whole.
+    </p>
+
+    <p>
+But The Fire Saint declined.
+No entry for the Unknown.
+Lest the Simte Flame shall answer the Saint's call.
+    </p>
+
+    <div class="divider">✦</div>
+
+    <p>
+For what seemed endless, though no time existed,
+The little Saint battled against the Unknowns.
+    </p>
+
+    <p>
+The Unknowns are many,
+But with Simte Flame that burns the Unknown,
+Easy work for the little Saint..
+    </p>
+
+    <p>
+Again and again, beyond all measures,
+The Saint protects, existence prevails.
+    </p>
+  </div>
+</section>
+
+<section class="fire-zone reveal">
+  <div class="fire-title">THE SIMTE FLAME</div>
+  <div class="poem">
+    <p>The flame that burns the Unknown.</p>
+    <p>The flame that answers the Saint's call.</p>
+    <p>The flame born from chaos.</p>
+    <p>The flame that annihilates chaos.</p>
+  </div>
+</section>
+
+<section class="section reveal" id="saint">
+  <div class="kicker">V — The Little Saint</div>
+  <h2>Inside Existence</h2>
+
+  <div class="poem">
+    <p>
+The Saint is bored from all those battles.
+He engulfs existence with the Simte Flame.
+    </p>
+
+    <p>
+The Unknowns seek entry,
+But the flame permits none.
+    </p>
+
+    <p class="violet">The Saint's journey begins inside existence..</p>
+
+    <div class="divider">✦</div>
+
+    <p>
+The little Saint, the humble chaos,
+Journeys through the cosmos in awe.
+    </p>
+
+    <p>
+The little Saint saw the universe, the galaxy, and beyond.
+Never has he seen something so beautiful. He is in awe.
+    </p>
+
+    <p class="question">For the first time ever, the Saint is curious..</p>
+  </div>
+</section>
+
+<section class="section reveal" id="journey">
+  <div class="kicker">VI — The Journey</div>
+  <h2>Eons of Peace</h2>
+
+  <div class="poem">
+    <p>
+For eons and eons inside existence,
+The Saint found peace.
+    </p>
+
+    <p>
+His love for playing with nebulae and black holes never ceased.
+    </p>
+
+    <p>
+What a pleasant day it was for the Saint to swim around the Milky Way,
+Constantly burping up neutron stars..
+    </p>
+
+    <div class="divider">✦</div>
+
+    <p>One occasion, a lucky encounter.</p>
+
+    <p>
+The Saint saw beings that looked a lot like himself,
+Beings that traveled upon the Earth.
+    </p>
+
+    <p>
+He saw them, understood them.
+He spent the time of his life around them.
+    </p>
+
+    <p>
+He loved reading their books,
+Especially those about the belief of beginnings.
+    </p>
+
+    <p class="question">But one thing he did not understand..</p>
+  </div>
+
+  <div class="quote">
+    Why did they decay?<br>
+    Why did they wither away?
+  </div>
+
+  <div class="poem">
+    <p>
+The Saint gazed upon existence,
+The wonders, the beings, the stories of beginnings.
+    </p>
+
+    <p>
+Yet the question of their fading remained unanswered.
+He carried the question with him
+And departed existence,
+Beyond reality, beyond all creation,
+Returning once more to the Unknown..
+    </p>
+  </div>
+</section>
+
+<section class="section reveal" id="duel">
+  <div class="kicker">VII — The Duel</div>
+  <h2>The Absolute And The Chaos</h2>
+
+  <div class="poem">
+    <p>
+The cheeky little Saint, the unbearable Saint,
+Speaks to the Creator, the Almighty.
+    </p>
+
+    <p>
+He proposes a duel.
+Not out of malice,
+Not out of hatred,
+But a thing to remember forever.
+    </p>
+
+    <p>
+The Creator smiles.
+The Saint smiles.
+    </p>
+
+    <p class="violet">
+The duel begins
+Between the Absolute
+And the Chaos..
+    </p>
+  </div>
+
+  <div class="divider">✦</div>
+
+  <div class="poem">
+    <p>
+The little Saint, the humble chaos,
+Struck the Creator with the Simte Flame.
+    </p>
+
+    <p>
+The flame capable of erasing that which does not exist,
+An Unknown that swallows paradox,
+Rendered meaningless beneath the flame.
+    </p>
+
+    <p>
+The Saint's eyes, the eyes of truth,
+The eyes that judge,
+That saw,
+That perceived all,
+    </p>
+
+    <p class="question">
+Failed hard in the face of the Creator,
+The Creator Of All Creators.
+    </p>
+
+    <p>
+The Saint, the Protector,
+The worthy flame,
+Struck the Creator again.
+    </p>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="kicker">VIII — Heat</div>
+  <h2>Beyond Flame</h2>
+
+  <div class="poem">
+    <p>
+The Saint channeled all his Simte Flame into one point.
+    </p>
+
+    <p>
+The Simte beam,
+Born from annihilated chaos within the Unknown,
+Pierced through the impossible.
+    </p>
+
+    <p class="question">How hot can it be?</p>
+
+    <p>
+The Unknown was erased.
+Half of the Unknown.
+Again,
+And again,
+And again..
+    </p>
+
+    <p>
+But the Creator
+Did not even bear the scent of fire..
+    </p>
+  </div>
+
+  <div class="fire-zone">
+    <div class="fire-title">HEAT OVERLOAD</div>
+
+    <div class="poem">
+      <p>
+The Saint channels all his capabilities,
+An utmost impossibility poured into the Simte Flame.
+      </p>
+
+      <p>
+He engulfed himself,
+Became the pure chaos-annihilating Simte Flame.
+      </p>
+
+      <p>No form.<br>Pure Simte Flame.</p>
+
+      <p>
+Heat beyond heat.<br>
+Heat beyond flame.<br>
+Heat beyond erasure.
+      </p>
+
+      <p>The Saint overloaded the Heat.</p>
+    </div>
+  </div>
+
+  <div class="poem">
+    <p>
+All the Unknown
+And all its Unknowns
+Vanished.
+    </p>
+
+    <p>No more.<br>Permanent.</p>
+
+    <p>
+A complete Heat
+That told the Unknown
+It should be emptier,
+More than what it already was.
+    </p>
+
+    <p class="violet">
+Now there was no more Unknown,
+Only an emptier nothingness.
+    </p>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="kicker">IX — The Hem</div>
+  <h2>For The First Time..</h2>
+
+  <div class="poem">
+    <p>But for the first time..</p>
+
+    <p class="violet">
+The hem of the Creator's robe<br>
+Burned?
+    </p>
+
+    <p>The Saint smiled.</p>
+
+    <p>
+And vanished away,
+Erasing himself for which he could not turn back..
+    </p>
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="kicker">X — Beyond Creation</div>
+  <h2>The Saint Wakes</h2>
+
+  <div class="poem">
+    <p>
+The chaotic Saint, the humble chaos,
+Woke up in a space of darkness.
+    </p>
+
+    <p>
+He looked around
+And saw an arrogant girl
+With a pen that shapes existence as her desire.
+    </p>
+
+    <p>
+He looked again
+And saw a chaotic idiot
+Who dreamed existence into being.
+    </p>
+
+    <p>
+The chaotic little Saint looked further
+And saw someone who transcends infinitely.
+    </p>
+
+    <p class="violet">The Saint understood.</p>
+  </div>
+
+  <div class="book">
+    <div class="book-icon">📖</div>
+    <h3>He Was In A Book.</h3>
+    <p>
+      A narrative shaped by the very beings
+      that decay and wither away.
+    </p>
+  </div>
+
+  <div class="poem">
+    <p>
+A narrative shaped by the very beings
+That decay and wither away,
+As he once knew.
+    </p>
+
+    <p class="violet">He knows he is in a book.</p>
+  </div>
+</section>
+
+<section class="section final reveal" id="ending">
+  <div class="kicker">XI — The End?</div>
+  <h2>Until Then..</h2>
+
+  <div class="poem">
+    <p>
+But for the last time..
+    </p>
+
+    <p>
+The chaotic Saint pointed upward and shouted—
+    </p>
+  </div>
+
+  <div class="quote">
+    "Well, meet again, you lovely Creator!<br>
+    Until then... byee!"
+  </div>
+
+  <div class="poem">
+    <p class="smile">And the Saint smiled..</p>
+  </div>
+</section>
+
+<section class="intro reveal">
+  <div class="intro-symbol">✦</div>
+  <p><em>THANK YOU FOR READING MY SILLY STORY</em></p>
+  <p class="dim">
+    The story ends here.<br>
+    Or perhaps it never really began.
+  </p>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-title">THE FIRE SAINT</div>
+  <div class="footer-symbol">✦</div>
+  <div class="footer-small">
+    A STORY-POEM OF THE UNKNOWN, CREATION, CHAOS, AND FIRE
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   SAFE INITIALIZATION
+   The page remains readable even if JavaScript fails.
+   ========================================================= */
+
+document.documentElement.classList.add("js");
+
+/* ---------- SCROLL PROGRESS ---------- */
+
+const progress = document.getElementById("progress");
+
+function updateProgress(){
+  const max =
+    document.documentElement.scrollHeight - window.innerHeight;
+
+  const value = max > 0 ? (window.scrollY / max) * 100 : 0;
+
+  progress.style.width = value + "%";
+}
+
+window.addEventListener("scroll", updateProgress, {passive:true});
+window.addEventListener("resize", updateProgress);
+updateProgress();
+
+/* ---------- REVEAL ---------- */
+
+const revealItems = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window){
+
+  const observer = new IntersectionObserver(
+    function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {threshold:.08}
+  );
+
+  revealItems.forEach(function(item){
+    observer.observe(item);
+  });
+
+}else{
+  revealItems.forEach(function(item){
+    item.classList.add("show");
+  });
+}
+
+/* ---------- STAR FIELD ---------- */
+
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+let stars = [];
+let width = 0;
+let height = 0;
+let dpr = 1;
+
+function resizeStars(){
+
+  dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  width = window.innerWidth;
+  height = window.innerHeight;
+
+  canvas.width = width * dpr;
+  canvas.height = height * dpr;
+
+  canvas.style.width = width + "px";
+  canvas.style.height = height + "px";
+
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+
+  const amount = Math.min(
+    180,
+    Math.max(70, Math.floor((width * height) / 8500))
+  );
+
+  stars = [];
+
+  for(let i=0;i<amount;i++){
+
+    stars.push({
+      x:Math.random()*width,
+      y:Math.random()*height,
+      r:Math.random()*1.25+.25,
+      a:Math.random()*.7+.15,
+      speed:Math.random()*.08+.015,
+      phase:Math.random()*Math.PI*2
+    });
+
+  }
+}
+
+function drawStars(time){
+
+  ctx.clearRect(0,0,width,height);
+
+  for(const star of stars){
+
+    const twinkle =
+      star.a +
+      Math.sin(time*.001*star.speed*20 + star.phase)*.12;
+
+    ctx.beginPath();
+    ctx.arc(star.x,star.y,star.r,0,Math.PI*2);
+
+    ctx.fillStyle =
+      "rgba(220,210,255," +
+      Math.max(.05,twinkle) +
+      ")";
+
+    ctx.fill();
+  }
+
+  requestAnimationFrame(drawStars);
+}
+
+resizeStars();
+window.addEventListener("resize",resizeStars);
+requestAnimationFrame(drawStars);
+
+/* ---------- NAVIGATION ---------- */
+
+document.querySelectorAll(".nav-links a").forEach(function(link){
+
+  link.addEventListener("click",function(event){
+
+    const target =
+      document.querySelector(
+        link.getAttribute("href")
+      );
+
+    if(target){
+      event.preventDefault();
+
+      target.scrollIntoView({
+       behavior:"smooth",
+        block:"start"
+      });
+    }
+
+  });
+
+});
+
+/* ---------- TAB TITLE ---------- */
+
+const normalTitle = document.title;
+
+document.addEventListener("visibilitychange",function(){
+
+  document.title =
+    document.hidden
+      ? "The Unknown awaits..."
+      : normalTitle;
